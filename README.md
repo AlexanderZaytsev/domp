@@ -43,12 +43,20 @@ Model & migration. Will be populated with the providers you specify.
 ### UserAuthentication
 Model & migration.
 
+### User model additions
+Here's what the `User` model will look like:
+
+```ruby
+class User < ActiveRecord::Base
+  has_many :authentications, class_name: 'UserAuthentication'
+  devise :omniauthable,  :database_authenticatable, :registerable,
+         :recoverable, :rememberable, :trackable, :validatable
+```
+
 ### User::OmniauthCallbacksController
 Here goes all the logic of creating multiple authentications. You are free to change everything, it's just a boilerplate that will make sense it most of the apps.
 
 ### Route additions
-The `controllers:` part will be added.
-
 ```ruby
 devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
 ```

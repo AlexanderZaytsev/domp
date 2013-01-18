@@ -37,7 +37,7 @@ class DompGenerator < Rails::Generators::NamedBase
     end
 
     inject_into_file "app/models/#{file_name}.rb", after: "  devise" do
-      " :omniauthable, "
+      " :omniauthable,"
     end
   end
 

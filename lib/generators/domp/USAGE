@@ -1,0 +1,12 @@
+Description:
+    Generator to bootstrap usage of multiple providers with Devise and Omniauth
+
+Example:
+    rails generate domp User facebook twitter
+
+    This will create:
+      create  app/models/authentication_provider.rb
+      create  app/models/user_authentication.rb
+      create  db/migrate/20130118200452_create_authentication_providers.rb
+      create  db/migrate/20130118200453_create_user_authentications.rb
+      create  app/controllers/users/omniauth_callbacks_controller.rb

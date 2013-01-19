@@ -1,5 +1,5 @@
 <% module_namespacing do -%>
-class <%= class_name %>::OmniauthCallbacksController < Devise::OmniauthCallbacksController
+class <%= class_name.pluralize %>::OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
 <% providers.each do |provider| -%>
   def <%= provider %>

@@ -50,8 +50,17 @@ Here's what the `User` model will look like:
 ```ruby
 class User < ActiveRecord::Base
   has_many :authentications, class_name: 'UserAuthentication'
-  devise :omniauthable, :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable
+
+  devise :omniauthable, :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :validatable
+
+  def self.create_from_omniauth(params)
+    attributes = {
+      email: params['info']['email'],
+      password: Devise.friendly_token
+    }
+
+    create attributes
+  end
 end
 ```
 

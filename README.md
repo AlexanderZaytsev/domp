@@ -11,6 +11,7 @@ rails generate devise:install
 rails generate devise User
 rails generate domp User facebook twitter
 ```
+You can list as many providers as you want, check out a [full list](https://github.com/intridea/omniauth/wiki/List-of-Strategies) of them.
 
 Note: this is not an engine but rather a generator which will generate models, controllers and setup configs for you. You are free to change everything. You are the king.
 
@@ -55,7 +56,7 @@ end
 ```
 
 ### User::OmniauthCallbacksController
-Here goes all the logic of creating multiple authentications. You are free to change everything, it's just a boilerplate that will make sense it most of the apps.
+Here goes all the logic of creating multiple authentications. You are free to change everything, it's just a boilerplate that will make sense in most of the apps.
 
 ### Route additions
 ```ruby

@@ -36,6 +36,20 @@ class DompGenerator < Rails::Generators::NamedBase
       "  has_many :authentications, class_name: '#{class_name}Authentication'\n"
     end
 
+    inject_into_class "app/models/#{file_name}.rb", class_name do
+      <<-METHOD.gsub(/^ {6}/, '')
+        def self.create_from_omniauth(params)
+          attributes = {
+            email: params['info']['email'],
+            password: Devise.friendly_token
+          }
+
+          create(attributes)
+        end
+
+      METHOD
+    end
+
     inject_into_file "app/models/#{file_name}.rb", after: "  devise" do
       " :omniauthable,"
     end

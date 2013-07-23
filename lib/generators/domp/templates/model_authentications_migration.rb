@@ -12,7 +12,7 @@ class Create<%= class_name %>Authentications < ActiveRecord::Migration
       t.datetime "updated_at",                 :null => false
     end
     add_index "<%= class_name.downcase %>_authentications", ["authentication_provider_id"], :name => "index_<%= class_name.downcase %>_authentications_on_authentication_provider_id"
-    add_index "<%= class_name.downcase %>_authentications", ["<%= class_name.downcase %>_id"], :name => "index_<%= class_name.downcase %>_authentications_on_user_id"
+    add_index "<%= class_name.downcase %>_authentications", ["<%= class_name.downcase %>_id"], :name => "index_<%= class_name.downcase %>_authentications_on_<%= class_name.downcase %>_id"
   end
 end
 <% end -%>

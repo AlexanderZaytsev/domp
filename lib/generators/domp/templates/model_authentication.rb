@@ -6,7 +6,7 @@ class <%= class_name %>Authentication < ActiveRecord::Base
   serialize :params
 
 <% if Rails::VERSION::MAJOR < 4 -%>
-  attr_accessible :user_id, :authentication_provider_id, :uid, :token, :token_expires_at, :params
+  attr_accessible "#{class_name.downcase}_id", :authentication_provider_id, :uid, :token, :token_expires_at, :params
 
 <% end -%>
   def self.create_from_omniauth(params, <%= class_name.downcase %>, provider)

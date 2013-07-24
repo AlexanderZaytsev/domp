@@ -86,6 +86,10 @@ gem "omniauth"
 gem "omniauth-facebook"
 gem "omniauth-twitter"
 ```
+
+## License
+This gem is released under the MIT License.
+
 ## Contributing
 
 1. Fork it

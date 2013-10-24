@@ -2,7 +2,7 @@
 class <%= class_name.pluralize %>::OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
 <% providers.each do |provider| -%>
-  def <%= provider %>
+  def <%= provider.underscore %>
     create
   end
 

@@ -23,7 +23,7 @@ class DompGenerator < Rails::Generators::NamedBase
     providers.each do |provider|
       id = ask("#{provider.capitalize} application ID:")
       secret = ask("#{provider.capitalize} application secret:")
-      omniauth_config << "\n  config.omniauth :#{provider}, '#{id}', '#{secret}'\n"
+      omniauth_config << "\n  config.omniauth :#{provider.underscore}, '#{id}', '#{secret}'\n"
     end
 
     inject_into_file 'config/initializers/devise.rb', after: "# config.omniauth :github, 'APP_ID', 'APP_SECRET', :scope => 'user,public_repo'" do

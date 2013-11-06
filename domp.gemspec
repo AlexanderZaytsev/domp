@@ -6,7 +6,7 @@ require 'domp/version'
 Gem::Specification.new do |gem|
   gem.name  = "domp"
   gem.version = Domp::VERSION
-  gem.licence = 'MIT'
+  gem.license = 'MIT'
   gem.authors = ["Alexander Zaytsev"]
   gem.email = ["alexander@say26.com"]
   gem.description = %q{Devise Omniauth Multiple Providers}

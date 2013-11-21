@@ -10,8 +10,8 @@ class <%= class_name %>Authentication < ActiveRecord::Base
 
 <% end -%>
   def self.create_from_omniauth(params, <%= class_name.downcase %>, provider)
+    params = HashWithIndifferentAccess.new(params)
     token_expires_at = params['credentials']['expires_at'] ? Time.at(params['credentials']['expires_at']).to_datetime : nil
-
     create(
       <%= class_name.downcase %>: <%= class_name.downcase %>,
       authentication_provider: provider,

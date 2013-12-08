@@ -33,7 +33,7 @@ class DompGenerator < Rails::Generators::NamedBase
 
   def update_model_class
     inject_into_class "app/models/#{file_name}.rb", class_name do
-      "  has_many :authentications, class_name: '#{class_name}Authentication'\n"
+      "  has_many :authentications, class_name: '#{class_name}Authentication', dependent: :destroy\n"
     end
 
     inject_into_class "app/models/#{file_name}.rb", class_name do

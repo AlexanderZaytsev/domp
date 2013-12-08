@@ -49,7 +49,7 @@ Here's what the `User` model will look like:
 
 ```ruby
 class User < ActiveRecord::Base
-  has_many :authentications, class_name: 'UserAuthentication'
+  has_many :authentications, class_name: 'UserAuthentication', dependent: :destroy
 
   devise :omniauthable, :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :validatable
 

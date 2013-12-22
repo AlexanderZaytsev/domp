@@ -11,6 +11,10 @@ class <%= class_name.pluralize %>::OmniauthCallbacksController < Devise::Omniaut
 
     def create
       auth_params = request.env["omniauth.auth"]
+      unless auth_params.is_a?(OmniAuth::AuthHash)
+        auth_params = OmniAuth::AuthHash.new(auth_params)
+      end
+
       provider = AuthenticationProvider.where(name: auth_params.provider).first
 
       authentication = provider.<%= class_name.downcase %>_authentications.where(uid: auth_params.uid).first

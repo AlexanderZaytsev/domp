@@ -26,7 +26,7 @@ class DompGenerator < Rails::Generators::NamedBase
       omniauth_config << "\n  config.omniauth :#{provider.underscore}, '#{id}', '#{secret}'\n"
     end
 
-    inject_into_file 'config/initializers/devise.rb', after: "# config.omniauth :github, 'APP_ID', 'APP_SECRET', :scope => 'user,public_repo'" do
+    inject_into_file 'config/initializers/devise.rb', after: "# config.omniauth :github, 'APP_ID', 'APP_SECRET', scope: 'user,public_repo'" do
       omniauth_config.join('')
     end
   end

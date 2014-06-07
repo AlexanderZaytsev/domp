@@ -17,17 +17,27 @@ class DompGenerator < Rails::Generators::NamedBase
     end
   end
 
-  def update_devise_config
-    omniauth_config = []
-
+  def ask_and_save_provider_secrets
+    config = []
     providers.each do |provider|
-      id = ask("#{provider.capitalize} application ID:")
-      secret = ask("#{provider.capitalize} application secret:")
-      omniauth_config << "\n  config.omniauth :#{provider.underscore}, '#{id}', '#{secret}'\n"
+      id = ask("#{provider.capitalize} application ID:").strip
+      secret = ask("#{provider.capitalize} application secret:").strip
+      config << "\n  #{provider.underscore}:\n    app_id: \"#{id}\"\n    secret: \"#{secret}\""
     end
 
-    inject_into_file 'config/initializers/devise.rb', after: "# config.omniauth :github, 'APP_ID', 'APP_SECRET', :scope => 'user,public_repo'" do
-      omniauth_config.join('')
+    inject_into_file 'config/secrets.yml', before: "development:" do
+      "omniauth: &omniauth#{config.join("")}\n\n"
+    end
+
+    gsub_file 'config/secrets.yml', /secret_key_base.*$/, "\\0\n  <<: *omniauth"
+  end
+
+  def update_devise_config
+    inject_into_file 'config/initializers/devise.rb', after: "# config.omniauth :github, 'APP_ID', 'APP_SECRET', scope: 'user,public_repo'" do
+      "\n  [ :#{providers.map(&:underscore).join(", :")} ].each do |provider|" +
+      "\n    secrets = Rails.application.secrets[provider]" +
+      "\n    config.omniauth provider, secrets[\"app_id\"], secrets[\"secret\"]" +
+      "\n  end"
     end
   end
 
